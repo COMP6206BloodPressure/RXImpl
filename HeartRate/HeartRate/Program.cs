@@ -29,7 +29,6 @@ namespace HeartRate
             var foreheadsObservable = imageObservable.Select(x => 
                                                      {
                                                          var gray = x.Convert<Gray, byte>();
-                                                         
                                                          var faces = haar.DetectMultiScale(gray, 1.1, 3, Size.Empty, Size.Empty).Select(y => 
                                                          {
                                                              var rect = new Rectangle();
@@ -49,14 +48,14 @@ namespace HeartRate
                                                          return Tuple.Create(x, faces);
                                                      });
 
-            /*var detectedForeheads = foreheadsObservable.Select(x =>
+            var detectedForeheads = foreheadsObservable.Select(x =>
             {
                 var foreheadRegions = x.Item2.Select(forehead =>
                 {
                     return x.Item1.GetSubRect(forehead);
                 });
                 return foreheadRegions;
-            });*/
+            });
 
 
             Console.ReadLine();
